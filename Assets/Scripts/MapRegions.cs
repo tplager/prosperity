@@ -15,7 +15,7 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     [SerializeField] private List<string> featureCostPairNames;
     [SerializeField] private List<FeatureCosts> featureCostsPairCosts;
-    private Dictionary<string, FeatureCosts> featureCosts = new Dictionary<string, FeatureCosts>(); 
+    private Dictionary<string, FeatureCosts> featureCosts = new Dictionary<string, FeatureCosts>();
 
     public Dictionary<EResources, int> Resources { get { return resources; } }
     // Start is called before the first frame update
@@ -45,7 +45,7 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void AddPhysicsRaycaster()
@@ -67,16 +67,23 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 FeatureCosts selectedFeatureCost = featureCosts[controller.CurrentFeature.ToString()];
 
+                Vector2 clickWorldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+
+                RaycastHit hit;
+                Physics.Raycast(clickWorldPosition, new Vector3(0, 0, 1), out hit, 1);
+
                 if (selectedFeatureCost.VerifyCosts(Resources))
                 { 
-                    Vector2 clickWorldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+                    if (controller.CurrentFeature != EFeatureType.Village && !hit.collider.name.Contains(controller.CurrentFeature.ToString()))
+                    {
+                        StartCoroutine(controller.FlashCursor());
+                        return;
+                    }
                     GameObject newFeature = Instantiate(featurePrefab,
                         new Vector3(clickWorldPosition.x, clickWorldPosition.y, 0),
                         Quaternion.identity);
                     newFeature.name = controller.CurrentFeature.ToString();
-                    newFeature.GetComponent<Feature>().Start();
-                    newFeature.GetComponent<Feature>().HomeRegion = this;
-                    newFeature.GetComponent<Feature>().FeatureType = controller.CurrentFeature;
+                    newFeature.GetComponent<Feature>().SetUpFeature(this, controller.CurrentFeature, controller);
                     newFeature.GetComponent<BoxCollider>().enabled = false;
 
                     features.Add(newFeature.gameObject);
@@ -85,7 +92,6 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 else
                 {
                     StartCoroutine(controller.FlashCursor()); 
-                    // Change color of cursor or something indicating that it can't be built
                 }
             }
         }

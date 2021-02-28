@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fdf994354a4ea40961cb1d0dc6212b, type: 3}
   m_Name: ResourceData9
   m_EditorClassIdentifier: 
-  stone: 500
-  wood: 500
-  iron: 500
-  gold: 500
-  grain: 500
-  meat: 500
-  water: 500
+  stone: 200
+  wood: 1000
+  iron: 200
+  gold: -1
+  grain: 200
+  meat: 200
+  water: -1

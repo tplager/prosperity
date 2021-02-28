@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b22d7fe3a30e0b48aed0cb3fc660fbf, type: 3}
   m_Name: LumberMillCosts
   m_EditorClassIdentifier: 
-  stone: 1000
+  stone: 0
   wood: 0
   iron: 0
   gold: 0

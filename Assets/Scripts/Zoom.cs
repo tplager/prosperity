@@ -16,6 +16,9 @@ public class Zoom : MonoBehaviour
     private Vector3 mouseStart, mouseMove;
     private Vector3 derp;
 
+    [SerializeField] private float positionTime; 
+    [SerializeField] private float cameraMoveSpeed; 
+
     void Start()
     {
         targetOrtho = Camera.main.orthographicSize;
@@ -46,6 +49,25 @@ public class Zoom : MonoBehaviour
             // If possible should try to find a way to clamp this to bounds
 
             transform.position = tempPosition;
+        }
+    }
+
+    public IEnumerator MoveCameraToPoint(Vector2 desiredPosition)
+    {
+        float fraction = 0;
+        Vector3 startPosition = transform.position;
+
+        while (fraction < 1) 
+        {
+            fraction += Time.deltaTime * cameraMoveSpeed;
+            if (fraction > 1)
+            {
+                fraction = 1;
+            }
+
+            transform.position = Vector3.Lerp(startPosition, new Vector3(desiredPosition.x, desiredPosition.y, -10), fraction);
+
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 }

@@ -12,21 +12,32 @@ public class GameController : MonoBehaviour
     private EFeatureType currentFeatureSelection;
 
     [SerializeField] private List<MapRegions> regions = new List<MapRegions>();
+    [SerializeField] private List<ResourceRegion> resourceRegionObjects = new List<ResourceRegion>();
+    private Dictionary<string, ResourceRegion> resourceRegions = new Dictionary<string, ResourceRegion>(); 
     private List<GameObject> features = new List<GameObject>();
     [SerializeField] private List<Text> resourceTexts = new List<Text>();
 
     private bool cursorFlashing;
 
+    [SerializeField] private RectTransform canvasRect; 
+    [SerializeField] private GameObject upgradeButton; 
+
     #region Properties
     public MapIconContainer IconContainer { get { return iconContainer; } }
     public Texture2D CurrentCursorTexture { get { return currentCursorTexture; } }
     public EFeatureType CurrentFeature { get { return currentFeatureSelection; } }
+    public Dictionary<string, ResourceRegion> ResourceRegions { get { return resourceRegions; } }
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (ResourceRegion resReg in resourceRegionObjects)
+        {
+            string resourceRegionName = resReg.name.Remove(resReg.name.Length - 9);
+            resourceRegionName = resourceRegionName[0].ToString().ToUpper() + resourceRegionName.Substring(1);
+            resourceRegions.Add(resourceRegionName, resReg); 
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +48,8 @@ public class GameController : MonoBehaviour
 
     public void FeatureDropdownChanged(int currentIndex)
     {
-        Vector2 cursorOffset = new Vector2(0, 0); 
+        Vector2 cursorOffset = new Vector2(0, 0);
+        DisableAllResourceRegionRenderers();
 
         if (currentIndex == 0)
         {
@@ -62,31 +74,43 @@ public class GameController : MonoBehaviour
             {
                 currentCursorTexture = iconContainer.QuarryIcon;
                 currentFeatureSelection = EFeatureType.Quarry;
+                resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 2)
             {
                 currentCursorTexture = iconContainer.LumberMillIcon;
                 currentFeatureSelection = EFeatureType.LumberMill;
+                resourceRegions["LumberMill"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["LumberMill"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 3)
             {
                 currentCursorTexture = iconContainer.MineIcon;
                 currentFeatureSelection = EFeatureType.Mine;
+                resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 4)
             {
                 currentCursorTexture = iconContainer.FieldIcon;
                 currentFeatureSelection = EFeatureType.Field;
+                resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 5)
             {
                 currentCursorTexture = iconContainer.LivestockFarmIcon;
                 currentFeatureSelection = EFeatureType.LivestockFarm;
+                resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 6)
             {
                 currentCursorTexture = iconContainer.WellIcon;
                 currentFeatureSelection = EFeatureType.Well;
+                resourceRegions["Well"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["Well"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 7)
             {
@@ -97,6 +121,8 @@ public class GameController : MonoBehaviour
             {
                 currentCursorTexture = iconContainer.PortIcon;
                 currentFeatureSelection = EFeatureType.Port;
+                resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
         }
 
@@ -121,35 +147,7 @@ public class GameController : MonoBehaviour
         {
             Feature gFeature = g.GetComponent<Feature>();
 
-            switch (gFeature.FeatureType)
-            {
-                case EFeatureType.Mine:
-                    gFeature.HomeRegion.ModifyResources(EResources.Iron, 5); 
-                    break;
-                case EFeatureType.Village:
-                    gFeature.HomeRegion.ModifyResources(EResources.Gold, 2);
-                    gFeature.HomeRegion.ModifyResources(EResources.Meat, -2);
-                    gFeature.HomeRegion.ModifyResources(EResources.Water, -2);
-                    break;
-                case EFeatureType.Port:
-                    gFeature.HomeRegion.ModifyResources(EResources.Meat, 2);
-                    break;
-                case EFeatureType.LumberMill:
-                    gFeature.HomeRegion.ModifyResources(EResources.Wood, 5);
-                    break;
-                case EFeatureType.Quarry:
-                    gFeature.HomeRegion.ModifyResources(EResources.Stone, 5);
-                    break;
-                case EFeatureType.Field:
-                    gFeature.HomeRegion.ModifyResources(EResources.Grain, 5);
-                    break;
-                case EFeatureType.LivestockFarm:
-                    gFeature.HomeRegion.ModifyResources(EResources.Meat, 5);
-                    break;
-                case EFeatureType.Well:
-                    gFeature.HomeRegion.ModifyResources(EResources.Water, 5);
-                    break;
-            }
+            gFeature.EndTurn();
         }
 
         TotalResourceTexts(); 
@@ -171,6 +169,33 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ShowUpgradeButton(Feature feature)
+    {
+        foreach (Image i in upgradeButton.GetComponentsInChildren<Image>())
+        {
+            i.enabled = true;
+        }
+
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(feature.transform.position);
+        Vector2 worldObjectScreenPosition = new Vector2(
+        ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f) + 40),
+        ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)) + 40);
+
+        upgradeButton.GetComponent<RectTransform>().anchoredPosition = worldObjectScreenPosition;
+
+        upgradeButton.GetComponent<Button>().onClick.AddListener(delegate { feature.Upgrade(); });
+    }
+
+    public void HideUpgradeButton()
+    {
+        upgradeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        foreach (Image i in upgradeButton.GetComponentsInChildren<Image>())
+        {
+            i.enabled = false;
+        }
+    }
+
     private void TotalResourceTexts()
     {
         foreach (Text resourceText in resourceTexts)
@@ -186,6 +211,14 @@ public class GameController : MonoBehaviour
                 resourceValue += resourcePair.Value;
                 resourceTexts[(int)resourcePair.Key].text = resourceValue.ToString();
             }
+        }
+    }
+
+    private void DisableAllResourceRegionRenderers()
+    {
+        foreach (ResourceRegion resReg in resourceRegionObjects)
+        {
+            resReg.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }

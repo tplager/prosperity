@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IPointerClickHandler
+public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private EFeatureType featureType;
     private MapIconContainer iconContainer;
     private SpriteRenderer sRenderer;
     public SpriteRenderer backgroundSRenderer; 
 
-    private MapRegions homeRegion; 
+    private MapRegions homeRegion;
+
+    private float timeSinceLastClick = 0;
+    private int clicks;
+
+    private GameController controller;
 
     public EFeatureType FeatureType
     {
@@ -70,11 +75,10 @@ public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler/
     public MapRegions HomeRegion
     {
         get { return homeRegion; }
-        set { homeRegion = value; }
     }
 
     // Start is called before the first frame update
-    public void Start()
+    void Start()
     {
         iconContainer = FindObjectOfType<GameController>().IconContainer;
         sRenderer = GetComponent<SpriteRenderer>();
@@ -85,16 +89,138 @@ public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler/
     // Update is called once per frame
     void Update()
     {
-        
+        if (clicks != 0)
+            timeSinceLastClick += Time.deltaTime;
     }
-
+    
+    public void SetUpFeature(MapRegions home, EFeatureType type, GameController controller)
+    {
+        Start();
+        homeRegion = home;
+        FeatureType = type;
+        this.controller = controller; 
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         backgroundSRenderer.enabled = true;
+
+        if (Camera.main.GetComponent<Zoom>().targetOrtho == 1)
+        {
+            controller.ShowUpgradeButton(this);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         backgroundSRenderer.enabled = false;
+
+        controller.HideUpgradeButton();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (clicks == 1 && timeSinceLastClick < 0.5f && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
+            {
+                clicks++;
+                Camera.main.GetComponent<Zoom>().targetOrtho = 1;
+                StartCoroutine(Camera.main.GetComponent<Zoom>().MoveCameraToPoint(transform.position));
+
+                Debug.Log("Double Click");
+            }
+            else// ((clicks == 2 || clicks == 0) && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
+            {
+                clicks = 1;
+
+                Debug.Log("Single Click");
+            }
+
+            timeSinceLastClick = 0;
+        }
+    }
+
+    public void EndTurn()
+    {
+        switch (featureType)
+        {
+            case EFeatureType.Mine:
+                homeRegion.ModifyResources(EResources.Iron, 5);
+                break;
+            case EFeatureType.Port:
+                homeRegion.ModifyResources(EResources.Meat, 2);
+                homeRegion.ModifyResources(EResources.Water, 5);
+                break;
+            case EFeatureType.LumberMill:
+                homeRegion.ModifyResources(EResources.Wood, 5);
+                break;
+            case EFeatureType.Quarry:
+                homeRegion.ModifyResources(EResources.Stone, 5);
+                break;
+            case EFeatureType.Field:
+                homeRegion.ModifyResources(EResources.Grain, 5);
+                break;
+            case EFeatureType.LivestockFarm:
+                homeRegion.ModifyResources(EResources.Meat, 5);
+                break;
+            case EFeatureType.Well:
+                homeRegion.ModifyResources(EResources.Water, 5);
+                break;
+            case EFeatureType.Village:
+                homeRegion.ModifyResources(EResources.Gold, 2);
+                homeRegion.ModifyResources(EResources.Meat, -2);
+                homeRegion.ModifyResources(EResources.Water, -2);
+                break;
+            case EFeatureType.Town:
+                homeRegion.ModifyResources(EResources.Gold, 5);
+                homeRegion.ModifyResources(EResources.Meat, -5);
+                homeRegion.ModifyResources(EResources.Water, -5);
+                break;
+            case EFeatureType.City:
+                homeRegion.ModifyResources(EResources.Gold, 12);
+                homeRegion.ModifyResources(EResources.Meat, -12);
+                homeRegion.ModifyResources(EResources.Water, -12);
+                break;
+        }
+    }
+
+    public void Upgrade()
+    {
+        switch (featureType)
+        {
+            //case EFeatureType.Mine:
+            //    homeRegion.ModifyResources(EResources.Iron, 5);
+            //    break;
+            //case EFeatureType.Port:
+            //    homeRegion.ModifyResources(EResources.Meat, 2);
+            //    homeRegion.ModifyResources(EResources.Water, 5);
+            //    break;
+            //case EFeatureType.LumberMill:
+            //    homeRegion.ModifyResources(EResources.Wood, 5);
+            //    break;
+            //case EFeatureType.Quarry:
+            //    homeRegion.ModifyResources(EResources.Stone, 5);
+            //    break;
+            //case EFeatureType.Field:
+            //    homeRegion.ModifyResources(EResources.Grain, 5);
+            //    break;
+            //case EFeatureType.LivestockFarm:
+            //    homeRegion.ModifyResources(EResources.Meat, 5);
+            //    break;
+            //case EFeatureType.Well:
+            //    homeRegion.ModifyResources(EResources.Water, 5);
+            //    break;
+            case EFeatureType.Village:
+                FeatureType = EFeatureType.Town;
+                break;
+            case EFeatureType.Town:
+                FeatureType = EFeatureType.City;
+                break;
+        }
+    }
+
+    private void UpdateFeatureType(EFeatureType featureType)
+    {
+
     }
 }
