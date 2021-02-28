@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 331d5554d3383a14e8a766a38a5b9d28
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - quarryIcon: {fileID: 2800000, guid: 595cc80bbc10e6142b691113cac1f197, type: 3}
+  - lumberMillIcon: {fileID: 2800000, guid: 51543dec7c358c740af7e5bf9044cc60, type: 3}
+  - mineIcon: {fileID: 2800000, guid: 6ac1a7f69cc2cca4daa78a4c893e1487, type: 3}
+  - fieldIcon: {fileID: 2800000, guid: 4ea0d2bf802d41e4b849b49c4a549034, type: 3}
+  - livestockFarmIcon: {fileID: 2800000, guid: d227589bca694e446b9b11e754340716, type: 3}
+  - wellIcon: {fileID: 2800000, guid: 80c724f502ee0ef41bd87635c1ff2bf0, type: 3}
+  - villageIcon: {fileID: 2800000, guid: fb4e9513aa8686b44b228b2b9847783b, type: 3}
+  - portIcon: {fileID: 2800000, guid: 8e93d823fa0235e4ea4bd0cf582966ab, type: 3}
+  - roadIcon: {instanceID: 0}
+  - aqeductIcon: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
