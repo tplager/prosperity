@@ -20,7 +20,7 @@ MonoBehaviour:
   wellIcon: {fileID: 2800000, guid: 80c724f502ee0ef41bd87635c1ff2bf0, type: 3}
   villageIcon: {fileID: 2800000, guid: fb4e9513aa8686b44b228b2b9847783b, type: 3}
   portIcon: {fileID: 2800000, guid: 8e93d823fa0235e4ea4bd0cf582966ab, type: 3}
-  roadIcon: {fileID: 0}
-  aqeductIcon: {fileID: 0}
+  tradeRouteIcon: {fileID: 2800000, guid: a52e97be830a54443b71c753f123205c, type: 3}
+  aqeductIcon: {fileID: 2800000, guid: f5b9556de1cf9964fabc9401a22d3f91, type: 3}
   townIcon: {fileID: 2800000, guid: dd49cfdb581ba7440ab4708f0233b885, type: 3}
   cityIcon: {fileID: 2800000, guid: d79cc2f7cab9f2843896963274ab2852, type: 3}

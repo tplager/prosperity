@@ -17,6 +17,9 @@ public class Feature : MonoBehaviour
 
     private GameController controller;
 
+    [SerializeField] private GameObject tradeRoutePrefab;
+    [SerializeField] private GameObject aqueductPrefab; 
+
     public EFeatureType FeatureType
     {
         get { return featureType; }
@@ -108,14 +111,34 @@ public class Feature : MonoBehaviour
         Start();
         homeRegion = home;
         FeatureType = type;
-        this.controller = controller; 
+        this.controller = controller;
+
+        BuildFeature();
+    }
+
+    public void BuildFeature()
+    {
+        if (featureType == EFeatureType.Village)
+        {
+            homeRegion.ModifyResources(EResources.Population, 5);
+        }
+        else if (featureType == EFeatureType.Town)
+        {
+            homeRegion.ModifyResources(EResources.Population, 7);
+        }
+        else if (featureType == EFeatureType.City)
+        {
+            homeRegion.ModifyResources(EResources.Population, 13);
+        }
+
+        homeRegion.FeatureCosts[featureType.ToString()].BuildFeature(homeRegion.Resources);
     }
 
     public void OnMouseEnter()
     {
         backgroundSRenderer.enabled = true;
 
-        if (Camera.main.orthographicSize == 1)
+        if (Camera.main.orthographicSize == 1 && (featureType == EFeatureType.Village || featureType == EFeatureType.Town))
         {
             controller.ShowUpgradeButton(this);
         }
@@ -140,11 +163,41 @@ public class Feature : MonoBehaviour
 
                 Debug.Log("Double Click");
             }
-            else// ((clicks == 2 || clicks == 0) && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
+            else// if ((clicks == 2 || clicks == 0) && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
             {
                 clicks = 1;
 
                 Debug.Log("Single Click");
+
+                if (controller.CurrentFeature == EFeatureType.Aqueduct || controller.CurrentFeature == EFeatureType.TradeRoute)
+                {
+                    if (!controller.BuildingRoad)
+                    {
+                        controller.BuildingRoad = true;
+                        if ((featureType == EFeatureType.Port || featureType == EFeatureType.Well) && controller.CurrentFeature == EFeatureType.Aqueduct)
+                        {
+                            // Instantiate a new aqueduct prefab and give control of it to the game controller
+                            // Game controller needs to update it each frame so it's at the same position as the mouse
+                            // Until either a different feature is clicked that can accept the aqueduct or until it is 
+                            // cancelled by clicking somewhere else or hitting enter or backspace or something
+                        }
+                        else if (controller.CurrentFeature == EFeatureType.TradeRoute)
+                        {
+                            // Same thing as above, but substitute aqueduct with trade route
+                        }
+                    }
+                    else
+                    {
+                        if (featureType == EFeatureType.Port || featureType == EFeatureType.Village || featureType == EFeatureType.Town || featureType == EFeatureType.City)
+                        {
+                            // Finish the Trade Route or Aqueduct and connect it to both features
+                        }
+                        else
+                        {
+                            // Drop the road into the abyss
+                        }
+                    }
+                }
             }
 
             timeSinceLastClick = 0;
@@ -197,36 +250,26 @@ public class Feature : MonoBehaviour
 
     public void Upgrade()
     {
+        EFeatureType upgradedFeature = EFeatureType.None;
+
         switch (featureType)
         {
-            //case EFeatureType.Mine:
-            //    homeRegion.ModifyResources(EResources.Iron, 5);
-            //    break;
-            //case EFeatureType.Port:
-            //    homeRegion.ModifyResources(EResources.Meat, 2);
-            //    homeRegion.ModifyResources(EResources.Water, 5);
-            //    break;
-            //case EFeatureType.LumberMill:
-            //    homeRegion.ModifyResources(EResources.Wood, 5);
-            //    break;
-            //case EFeatureType.Quarry:
-            //    homeRegion.ModifyResources(EResources.Stone, 5);
-            //    break;
-            //case EFeatureType.Field:
-            //    homeRegion.ModifyResources(EResources.Grain, 5);
-            //    break;
-            //case EFeatureType.LivestockFarm:
-            //    homeRegion.ModifyResources(EResources.Meat, 5);
-            //    break;
-            //case EFeatureType.Well:
-            //    homeRegion.ModifyResources(EResources.Water, 5);
-            //    break;
             case EFeatureType.Village:
-                FeatureType = EFeatureType.Town;
+                upgradedFeature = EFeatureType.Town;
                 break;
             case EFeatureType.Town:
-                FeatureType = EFeatureType.City;
+                upgradedFeature = EFeatureType.City;
                 break;
+        }
+
+        if (upgradedFeature != EFeatureType.None)
+        {
+            FeatureCosts selectedFeatureCost = homeRegion.FeatureCosts[upgradedFeature.ToString()];
+
+            if (selectedFeatureCost.VerifyCosts(homeRegion.Resources))
+                FeatureType = upgradedFeature;
+            else
+                StartCoroutine(controller.FlashCursor());
         }
     }
 

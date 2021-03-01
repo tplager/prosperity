@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: FieldCosts
   m_EditorClassIdentifier: 
   stone: 0
-  wood: 0
+  wood: 3
   iron: 0
-  gold: 0
+  gold: 4
   grain: 0
   meat: 0
-  water: 0
+  water: 4
+  population: 2

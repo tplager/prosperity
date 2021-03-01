@@ -12,6 +12,7 @@ public class FeatureCosts : ScriptableObject
     [SerializeField] private int grain;
     [SerializeField] private int meat;
     [SerializeField] private int water;
+    [SerializeField] private int population;
 
     public int Stone { get => stone; set => stone = value; }
     public int Wood { get => wood; set => wood = value; }
@@ -20,6 +21,7 @@ public class FeatureCosts : ScriptableObject
     public int Grain { get => grain; set => grain = value; }
     public int Meat { get => meat; set => meat = value; }
     public int Water { get => water; set => water = value; }
+    public int Population { get => population; set => population = value; }
 
     public bool VerifyCosts(Dictionary<EResources, int> resources)
     {
@@ -49,6 +51,12 @@ public class FeatureCosts : ScriptableObject
                 case EResources.Water:
                     resourceCost = water;
                     break;
+                case EResources.Population:
+                    resourceCost = 0;
+                    break;
+                case EResources.UncountedPopulation:
+                    resourceCost = population;
+                    break;
             }
 
             if (resourceCost > resource.Value)
@@ -58,5 +66,52 @@ public class FeatureCosts : ScriptableObject
         }
 
         return true;
+    }
+
+    public void BuildFeature(Dictionary<EResources, int> resources)
+    {
+        Dictionary<EResources, int> updatedResources = new Dictionary<EResources, int>();
+
+        foreach (KeyValuePair<EResources, int> resource in resources)
+        {
+            int resourceCost = 0;
+            switch (resource.Key)
+            {
+                case EResources.Stone:
+                    resourceCost = stone;
+                    break;
+                case EResources.Wood:
+                    resourceCost = wood;
+                    break;
+                case EResources.Iron:
+                    resourceCost = iron;
+                    break;
+                case EResources.Gold:
+                    resourceCost = gold;
+                    break;
+                case EResources.Grain:
+                    resourceCost = grain;
+                    break;
+                case EResources.Meat:
+                    resourceCost = meat;
+                    break;
+                case EResources.Water:
+                    resourceCost = water;
+                    break;
+                case EResources.Population:
+                    resourceCost = 0;
+                    break;
+                case EResources.UncountedPopulation:
+                    resourceCost = population;
+                    break;
+            }
+
+            updatedResources.Add(resource.Key, resource.Value - resourceCost);
+        }
+
+        foreach (KeyValuePair<EResources, int> updatedResource in updatedResources)
+        {
+            resources[updatedResource.Key] = updatedResource.Value;
+        }
     }
 }

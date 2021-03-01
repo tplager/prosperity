@@ -10,14 +10,23 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private List<GameObject> features = new List<GameObject>(); 
     private MeshRenderer meshRend; 
     [SerializeField] private GameObject featurePrefab;
-    [SerializeField] private Resources resourceCap; 
+    [SerializeField] private Resources resourceCap;
+
+    //[SerializeField] private List<string> startingResourceNames = new List<string>();
+    [SerializeField] private List<int> startingResourceValues = new List<int>(); 
     private Dictionary<EResources, int> resources = new Dictionary<EResources, int>();
+    private Dictionary<EResources, int> previousResources = new Dictionary<EResources, int>();
 
     [SerializeField] private List<string> featureCostPairNames;
     [SerializeField] private List<FeatureCosts> featureCostsPairCosts;
     private Dictionary<string, FeatureCosts> featureCosts = new Dictionary<string, FeatureCosts>();
 
+    #region Properties
     public Dictionary<EResources, int> Resources { get { return resources; } }
+    public Dictionary<EResources, int> PreviousResources { get { return previousResources; } set { previousResources = value; } }
+    public Dictionary<string, FeatureCosts> FeatureCosts { get { return featureCosts; } }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +37,15 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         controller = FindObjectOfType<GameController>();
 
-        resources.Add(EResources.Stone, 0);
-        resources.Add(EResources.Wood, 0);
-        resources.Add(EResources.Iron, 0);
-        resources.Add(EResources.Gold, 0);
-        resources.Add(EResources.Grain, 0);
-        resources.Add(EResources.Meat, 0);
-        resources.Add(EResources.Water, 0); 
+        resources.Add(EResources.Stone, startingResourceValues[0]);
+        resources.Add(EResources.Wood, startingResourceValues[1]);
+        resources.Add(EResources.Iron, startingResourceValues[2]);
+        resources.Add(EResources.Gold, startingResourceValues[3]);
+        resources.Add(EResources.Grain, startingResourceValues[4]);
+        resources.Add(EResources.Meat, startingResourceValues[5]);
+        resources.Add(EResources.Water, startingResourceValues[6]);
+        resources.Add(EResources.Population, 0);
+        resources.Add(EResources.UncountedPopulation, 0);
 
         for (int i = 0; i < featureCostPairNames.Count; i++)
         {
@@ -63,7 +74,11 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             Debug.Log("Clicked: " + gameObject.name);
 
-            if (controller.CurrentFeature != EFeatureType.None)
+            if (controller.CurrentFeature == EFeatureType.TradeRoute || controller.CurrentFeature == EFeatureType.Aqueduct)
+            {
+                StartCoroutine(controller.FlashCursor());
+            }
+            else if (controller.CurrentFeature != EFeatureType.None)
             {
                 FeatureCosts selectedFeatureCost = featureCosts[controller.CurrentFeature.ToString()];
 
@@ -119,5 +134,10 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void ModifyResources(EResources resource, int amountToModify)
     {
         resources[resource] += amountToModify;
+
+        if (resource == EResources.Population)
+        {
+            resources[EResources.UncountedPopulation] += amountToModify; 
+        }
     }
 }

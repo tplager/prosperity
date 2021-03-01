@@ -10,5 +10,7 @@ public enum EResources
     Gold, 
     Grain, 
     Meat, 
-    Water
+    Water, 
+    Population, 
+    UncountedPopulation
 }

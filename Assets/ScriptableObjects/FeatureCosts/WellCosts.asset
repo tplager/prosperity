@@ -15,7 +15,8 @@ MonoBehaviour:
   stone: 0
   wood: 0
   iron: 0
-  gold: 0
+  gold: 4
   grain: 0
   meat: 0
   water: 0
+  population: 0

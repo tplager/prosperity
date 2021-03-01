@@ -14,5 +14,7 @@ public enum EFeatureType
     Well, 
     Village, 
     Town, 
-    City
+    City, 
+    TradeRoute, 
+    Aqueduct
 }

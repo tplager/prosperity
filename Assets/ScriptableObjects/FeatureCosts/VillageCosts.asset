@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b22d7fe3a30e0b48aed0cb3fc660fbf, type: 3}
   m_Name: VillageCosts
   m_EditorClassIdentifier: 
-  stone: 0
-  wood: 0
-  iron: 0
-  gold: 0
-  grain: 0
-  meat: 0
-  water: 0
+  stone: 2
+  wood: 2
+  iron: 2
+  gold: 3
+  grain: 1
+  meat: 1
+  water: 2
+  population: 0
