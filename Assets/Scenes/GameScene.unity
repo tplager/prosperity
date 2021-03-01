@@ -334,29 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 4c0cc1582b613274fb71a1940405f50e, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &48497456
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -405,6 +383,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 787079527}
   - {fileID: 1578440930}
   m_Father: {fileID: 983096977}
   m_RootOrder: 6
@@ -481,6 +460,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1643947943}
   - {fileID: 198622526}
   m_Father: {fileID: 983096977}
   m_RootOrder: 7
@@ -528,6 +508,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102977511}
   m_CullTransparentMesh: 0
+--- !u!1 &132048219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132048222}
+  - component: {fileID: 132048221}
+  - component: {fileID: 132048220}
+  m_Layer: 5
+  m_Name: PopulationChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &132048220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132048219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &132048221
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132048219}
+  m_CullTransparentMesh: 0
+--- !u!224 &132048222
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132048219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1552045350}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &136511224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fe77df72af471cb4785573b2d71c35a9, type: 3}
@@ -547,29 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: c7af975c6c9f3e54b8e253582c1d9507, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &136511226
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1068,7 +1105,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 102977512}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1292,29 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: ce714b02f73b9d441bd1fbdebe193545, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &263677885
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1443,7 +1458,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1552045350}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1492,6 +1507,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298799019}
   m_CullTransparentMesh: 0
+--- !u!1 &316776578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 316776581}
+  - component: {fileID: 316776580}
+  - component: {fileID: 316776579}
+  m_Layer: 5
+  m_Name: GoldChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &316776579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316776578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &316776580
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316776578}
+  m_CullTransparentMesh: 0
+--- !u!224 &316776581
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316776578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1469294601}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.3, y: 7.299993}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &320851607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,6 +2034,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1557109513}
   - {fileID: 1663487082}
   m_Father: {fileID: 983096977}
   m_RootOrder: 1
@@ -1986,6 +2081,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402853585}
+  m_CullTransparentMesh: 0
+--- !u!1 &403671223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403671224}
+  - component: {fileID: 403671226}
+  - component: {fileID: 403671225}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &403671224
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403671223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1421319951}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000076294, y: 0.0000071526}
+  m_SizeDelta: {x: 247.67877, y: 46.439774}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &403671225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403671223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Not Enough '
+--- !u!222 &403671226
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403671223}
   m_CullTransparentMesh: 0
 --- !u!1001 &494560342
 PrefabInstance:
@@ -2282,29 +2456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 27b0e370abcf3f8468ea970484d50bbf, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &572133343
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2354,7 +2506,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 638212124}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2432,6 +2584,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1156459969}
   - {fileID: 631450497}
   m_Father: {fileID: 983096977}
   m_RootOrder: 2
@@ -2508,6 +2661,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1014737410}
   - {fileID: 803560206}
   m_Father: {fileID: 983096977}
   m_RootOrder: 3
@@ -2584,6 +2738,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1143385438}
   - {fileID: 919451224}
   m_Father: {fileID: 983096977}
   m_RootOrder: 5
@@ -2676,6 +2831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconContainer: {fileID: 11400000, guid: 986176b8ff4d65d4c89e1f0ca11f17b2, type: 2}
   hazardCursorTexture: {fileID: 2800000, guid: c73235027637e5342a8141ad6692b532, type: 3}
+  notEnoughText: {fileID: 403671225}
   regions:
   - {fileID: 804598490}
   - {fileID: 48497455}
@@ -2704,9 +2860,124 @@ MonoBehaviour:
   - {fileID: 1578440931}
   - {fileID: 198622527}
   - {fileID: 298799021}
+  resourceChangedTexts:
+  - {fileID: 1557109511}
+  - {fileID: 1156459967}
+  - {fileID: 1014737408}
+  - {fileID: 316776579}
+  - {fileID: 1143385436}
+  - {fileID: 787079525}
+  - {fileID: 1643947941}
+  - {fileID: 132048220}
   turnCounter: {fileID: 552657138}
   canvasRect: {fileID: 1767022794}
   upgradeButton: {fileID: 1133487946}
+  featureCostPairNames:
+  - Mine
+  - Port
+  - LumberMill
+  - Quarry
+  - Field
+  - LivestockFarm
+  - Well
+  - Village
+  - Town
+  - City
+  - TradeRoute
+  - Aqueduct
+  featureCostsPairCosts:
+  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
+  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
+  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
+  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
+  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
+  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
+  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
+  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
+  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
+  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  - {fileID: 11400000, guid: 0c190adbfecd4bd4698a382356abbde9, type: 2}
+  - {fileID: 11400000, guid: 00501516c41820f4f936c03a4e6d0cc5, type: 2}
+  populationLimit: 50
+--- !u!1 &787079524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 787079527}
+  - component: {fileID: 787079526}
+  - component: {fileID: 787079525}
+  m_Layer: 5
+  m_Name: MeatChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &787079525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787079524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &787079526
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787079524}
+  m_CullTransparentMesh: 0
+--- !u!224 &787079527
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787079524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 55192320}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &803560205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2737,7 +3008,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 652973118}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2805,29 +3076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 76fb38508bf25df4d894247b8d280c0b, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &804598491
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2877,7 +3126,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 726899837}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2945,29 +3194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 913bc5f37785c2f4993fbc95874c67d3, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &940010279
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3097,6 +3324,85 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1014737407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1014737410}
+  - component: {fileID: 1014737409}
+  - component: {fileID: 1014737408}
+  m_Layer: 5
+  m_Name: IronChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1014737408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014737407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1014737409
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014737407}
+  m_CullTransparentMesh: 0
+--- !u!224 &1014737410
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014737407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 652973118}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1050826813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3544,29 +3850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 0d8ac21515b7d83428f6bbe19e6f6920, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1139730595
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3586,6 +3870,164 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d537cec2a3080aa4abd2296ddc24b3af, type: 3}
   m_PrefabInstance: {fileID: 1343025406}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1143385435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1143385438}
+  - component: {fileID: 1143385437}
+  - component: {fileID: 1143385436}
+  m_Layer: 5
+  m_Name: GrainChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1143385436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143385435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1143385437
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143385435}
+  m_CullTransparentMesh: 0
+--- !u!224 &1143385438
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143385435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 726899837}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1156459966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156459969}
+  - component: {fileID: 1156459968}
+  - component: {fileID: 1156459967}
+  m_Layer: 5
+  m_Name: WoodChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1156459967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156459966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1156459968
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156459966}
+  m_CullTransparentMesh: 0
+--- !u!224 &1156459969
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156459966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 638212124}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1169782753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3857,6 +4299,82 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c97d738e096e32e418a9f9bbe3671043, type: 3}
+--- !u!1 &1421319950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421319951}
+  - component: {fileID: 1421319953}
+  - component: {fileID: 1421319952}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1421319951
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421319950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 403671224}
+  m_Father: {fileID: 1767022794}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -531.65625, y: -357.51135}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1421319952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421319950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1421319953
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421319950}
+  m_CullTransparentMesh: 0
 --- !u!1 &1428384398
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,29 +4626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 06c4e58e853983b43afd0060a8e2fa08, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1448210441
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4179,6 +4675,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 316776581}
   - {fileID: 2070987851}
   m_Father: {fileID: 983096977}
   m_RootOrder: 4
@@ -4440,6 +4937,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 132048222}
   - {fileID: 298799020}
   m_Father: {fileID: 983096977}
   m_RootOrder: 0
@@ -4487,6 +4985,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552045349}
   m_CullTransparentMesh: 0
+--- !u!1 &1557109510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557109513}
+  - component: {fileID: 1557109512}
+  - component: {fileID: 1557109511}
+  m_Layer: 5
+  m_Name: StoneChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1557109511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557109510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1557109512
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557109510}
+  m_CullTransparentMesh: 0
+--- !u!224 &1557109513
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557109510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 402853586}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.3}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1557211686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a248c5964b2dd314cb131a5cd6b587c0, type: 3}
@@ -4506,29 +5083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 12429eabba7db204f9e299d9eb3bfd9a, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1557211688
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4578,7 +5133,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 55192320}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4736,29 +5291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: c9c3a232c638548419479edb67c4d094, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1605886970
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4797,29 +5330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: a9fdb2481c79dab408c8e9b5f39d30da, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1631033930
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4839,6 +5350,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93e206b49d6ec3143a003c6d9df924b7, type: 3}
   m_PrefabInstance: {fileID: 1050826813}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1643947940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643947943}
+  - component: {fileID: 1643947942}
+  - component: {fileID: 1643947941}
+  m_Layer: 5
+  m_Name: WaterChangeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1643947941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643947940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1643947942
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643947940}
+  m_CullTransparentMesh: 0
+--- !u!224 &1643947943
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643947940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 102977512}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 15.299976, y: 7.2999988}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1663487081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +5459,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 402853586}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5166,6 +5756,7 @@ RectTransform:
   - {fileID: 320851608}
   - {fileID: 2070497839}
   - {fileID: 552657137}
+  - {fileID: 1421319951}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5270,29 +5861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featurePrefab: {fileID: 4641170048451077348, guid: 2519a5bc402d66849855992a504514d9, type: 3}
   resourceCap: {fileID: 11400000, guid: 2e1402d8c29d9544fa94e19721fbf931, type: 2}
-  startingResourceValues: 0a0000000a0000000a0000000a0000000a0000000a0000000a000000
-  featureCostPairNames:
-  - Mine
-  - Port
-  - LumberMill
-  - Quarry
-  - Field
-  - LivestockFarm
-  - Well
-  - Village
-  - Town
-  - City
-  featureCostsPairCosts:
-  - {fileID: 11400000, guid: ba360140fb4103244baf38f658b098a5, type: 2}
-  - {fileID: 11400000, guid: 7822516ef4b9d814bb20f80ec3dd992b, type: 2}
-  - {fileID: 11400000, guid: a67e381951ee8c84c8498e8b0c51d4c9, type: 2}
-  - {fileID: 11400000, guid: 3ac28a05c74ae5246a9a1061d849a313, type: 2}
-  - {fileID: 11400000, guid: 72c9ded8c67bfd44c811afc770aedd03, type: 2}
-  - {fileID: 11400000, guid: 0ad95dd87a3803e4d8547d084d9ab8b1, type: 2}
-  - {fileID: 11400000, guid: 9b5221104131fa247a305baccbf6f1cb, type: 2}
-  - {fileID: 11400000, guid: d229c75c293f36f4f95e31f202285aef, type: 2}
-  - {fileID: 11400000, guid: 9e9aaff29f15b214687b668f30f0cbce, type: 2}
-  - {fileID: 11400000, guid: 8d1c4e9a2b1b38841a36cf9807f1b676, type: 2}
+  startingResourceValues: 0a0000000a0000000a000000140000000a0000000a0000000a000000
 --- !u!64 &1917838955
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5461,7 +6030,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1469294601}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -11,25 +12,50 @@ public class GameController : MonoBehaviour
     private Texture2D currentCursorTexture;
     private EFeatureType currentFeatureSelection;
 
+    [SerializeField] private Text notEnoughText; 
+
     [SerializeField] private List<MapRegions> regions = new List<MapRegions>();
     [SerializeField] private List<ResourceRegion> resourceRegionObjects = new List<ResourceRegion>();
     private Dictionary<string, ResourceRegion> resourceRegions = new Dictionary<string, ResourceRegion>(); 
     private List<GameObject> features = new List<GameObject>();
     [SerializeField] private List<Text> resourceTexts = new List<Text>();
+    [SerializeField] private List<Text> resourceChangedTexts = new List<Text>();
     [SerializeField] private Text turnCounter; 
 
     private bool buildingRoad;
+    private GameObject currentRoad = null; 
 
     [SerializeField] private RectTransform canvasRect; 
-    [SerializeField] private GameObject upgradeButton; 
+    [SerializeField] private GameObject upgradeButton;
+
+    [SerializeField] private List<string> featureCostPairNames;
+    [SerializeField] private List<FeatureCosts> featureCostsPairCosts;
+    private Dictionary<string, FeatureCosts> featureCosts = new Dictionary<string, FeatureCosts>();
+
+    [SerializeField] private int populationLimit;
+
+    private Dictionary<EResources, int> previousResources = new Dictionary<EResources, int>();
 
     #region Properties
     public MapIconContainer IconContainer { get { return iconContainer; } }
     public Texture2D CurrentCursorTexture { get { return currentCursorTexture; } }
     public EFeatureType CurrentFeature { get { return currentFeatureSelection; } }
     public Dictionary<string, ResourceRegion> ResourceRegions { get { return resourceRegions; } }
-
     public bool BuildingRoad { get { return buildingRoad; } set { buildingRoad = value; } }
+    public GameObject CurrentRoad 
+    { 
+        get { return currentRoad; } 
+        set 
+        { 
+            currentRoad = value;
+            if (currentRoad == null)
+                buildingRoad = false;
+            else
+                buildingRoad = true;
+        }
+    }
+    public Dictionary<string, FeatureCosts> FeatureCosts { get { return featureCosts; } }
+    public Text NotEnoughText { get { return notEnoughText; } }
     #endregion
 
     // Start is called before the first frame update
@@ -41,27 +67,72 @@ public class GameController : MonoBehaviour
             resourceRegionName = resourceRegionName[0].ToString().ToUpper() + resourceRegionName.Substring(1);
             resourceRegions.Add(resourceRegionName, resReg); 
         }
+
+        for (int i = 0; i < featureCostPairNames.Count; i++)
+        {
+            featureCosts.Add(featureCostPairNames[i], featureCostsPairCosts[i]);
+        }
+
+        previousResources.Add(EResources.Stone, 0);
+        previousResources.Add(EResources.Wood, 0);
+        previousResources.Add(EResources.Iron, 0);
+        previousResources.Add(EResources.Gold, 0);
+        previousResources.Add(EResources.Grain, 0);
+        previousResources.Add(EResources.Meat, 0);
+        previousResources.Add(EResources.Water, 0);
+        previousResources.Add(EResources.Population, 0);
+        previousResources.Add(EResources.UncountedPopulation, 0);
+
+        TotalResourceTexts();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (buildingRoad)
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            currentRoad.GetComponent<LineRenderer>().SetPosition(1, new Vector3(mousePosition.x, mousePosition.y, 0));
+
+            Vector3[] roadPositions = new Vector3[currentRoad.GetComponent<LineRenderer>().positionCount];
+            currentRoad.GetComponent<LineRenderer>().GetPositions(roadPositions);
+            currentRoad.GetComponent<TradeRoute>().Length = (int)Vector3.Distance(roadPositions[0], roadPositions[1]);
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                Destroy(CurrentRoad);
+                CurrentRoad = null; 
+            }
+        }
     }
 
     public void FeatureDropdownChanged(int currentIndex)
     {
-        Vector2 cursorOffset = new Vector2(0, 0);
+        Vector2 cursorOffset = new Vector2(250, 250);
         DisableAllResourceRegionRenderers();
 
-        if (currentIndex == 0)
+        if (currentIndex == 0 || currentIndex == 9|| currentIndex == 10)
         {
-            currentCursorTexture = null;
-            currentFeatureSelection = EFeatureType.None;
-
             foreach (GameObject g in features)
             {
                 g.GetComponent<BoxCollider>().enabled = true;
+            }
+            
+            if (currentIndex == 0)
+            {
+                currentCursorTexture = null;
+                currentFeatureSelection = EFeatureType.None;
+                cursorOffset = new Vector2(0, 0);
+            }
+            else if (currentIndex == 9)
+            {
+                currentCursorTexture = iconContainer.TradeRouteIcon;
+                currentFeatureSelection = EFeatureType.TradeRoute;
+            }
+            else if (currentIndex == 10)
+            {
+                currentCursorTexture = iconContainer.AqeductIcon;
+                currentFeatureSelection = EFeatureType.Aqueduct;
             }
         }
         else
@@ -70,8 +141,6 @@ public class GameController : MonoBehaviour
             {
                 g.GetComponent<BoxCollider>().enabled = false; 
             }
-
-            cursorOffset = new Vector2(250, 250);
             
             if (currentIndex == 1)
             {
@@ -127,18 +196,6 @@ public class GameController : MonoBehaviour
                 resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
-            else if (currentIndex == 9)
-            {
-                currentCursorTexture = iconContainer.TradeRouteIcon;
-                currentFeatureSelection = EFeatureType.TradeRoute;
-                DisableAllResourceRegionRenderers();
-            }
-            else if (currentIndex == 10)
-            {
-                currentCursorTexture = iconContainer.AqeductIcon;
-                currentFeatureSelection = EFeatureType.Aqueduct;
-                DisableAllResourceRegionRenderers();
-            }
         }
 
         Cursor.SetCursor(currentCursorTexture, cursorOffset, CursorMode.Auto);
@@ -147,24 +204,42 @@ public class GameController : MonoBehaviour
     public IEnumerator FlashCursor()
     {
         Cursor.SetCursor(hazardCursorTexture, new Vector2(250, 250), CursorMode.Auto);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         Cursor.SetCursor(currentCursorTexture, new Vector2(250, 250), CursorMode.Auto);
     }
 
     public void AddFeature(Feature newFeature)
     {
         features.Add(newFeature.gameObject);
+        SpecifyResourceTexts(newFeature.HomeRegion);
     }
 
     public void EndTurn()
     {
+        previousResources.Clear();
+
         foreach (MapRegions region in regions)
         {
             region.PreviousResources.Clear();
 
             foreach (KeyValuePair<EResources, int> resource in region.Resources)
             {
-                region.PreviousResources.Add(resource.Key, resource.Value);
+                int resourceValue = resource.Value;
+
+                if (region.TradeRoutes[resource.Key].Count != 0)
+                {
+                    foreach (MapRegions otherRegion in region.TradeRoutes[resource.Key])
+                    {
+                        resourceValue += otherRegion.Resources[resource.Key];
+                    }
+                }
+
+                region.PreviousResources.Add(resource.Key, resourceValue);
+
+                if (!previousResources.ContainsKey(resource.Key))
+                    previousResources.Add(resource.Key, 0);
+
+                previousResources[resource.Key] += resource.Value;
             }
         }
 
@@ -183,12 +258,24 @@ public class GameController : MonoBehaviour
 
         if (prosperityCounter == regions.Count)
         {
-            // You Win!
+            SceneManager.LoadScene("WinScene");
         }
 
         turnCounter.text = (int.Parse(turnCounter.text) + 1).ToString(); 
 
-        TotalResourceTexts(); 
+        TotalResourceTexts();
+        TotalPreviousResourceTexts();
+
+        foreach (MapRegions region in regions)
+        {
+            foreach (KeyValuePair<EResources, int> resource in region.Resources)
+            {
+                if (resource.Value < 0)
+                {
+                    SceneManager.LoadScene("LoseScene");
+                }
+            }
+        }
     }
 
     public void SpecifyResourceTexts(MapRegions region)
@@ -203,10 +290,44 @@ public class GameController : MonoBehaviour
         {
             if (resourcePair.Key == EResources.UncountedPopulation)
                 continue;
+            
+            int resourceValue = resourcePair.Value;
 
-            int resourceValue = int.Parse(resourceTexts[(int)resourcePair.Key].text);
-            resourceValue = resourcePair.Value;
+            if (region.TradeRoutes[resourcePair.Key].Count != 0)
+            {
+                foreach (MapRegions otherRegion in region.TradeRoutes[resourcePair.Key])
+                {
+                    resourceValue += otherRegion.Resources[resourcePair.Key];
+                }
+            }
+
             resourceTexts[(int)resourcePair.Key].text = resourceValue.ToString();
+        }
+    }
+
+    public void SpecifyPreviousResourceText(MapRegions region)
+    {
+        if (region == null)
+        {
+            TotalPreviousResourceTexts();
+            return;
+        }
+
+        foreach (KeyValuePair<EResources, int> resourcePair in region.Resources)
+        {
+            if (resourcePair.Key == EResources.UncountedPopulation)
+                continue;
+
+            int resourceValue = resourcePair.Value - region.PreviousResources[resourcePair.Key];
+
+            if (resourceValue < 0)
+                resourceChangedTexts[(int)resourcePair.Key].color = Color.red;
+            else if (resourceValue > 0)
+                resourceChangedTexts[(int)resourcePair.Key].color = Color.green;
+            else
+                resourceChangedTexts[(int)resourcePair.Key].color = resourceTexts[(int)resourcePair.Key].color;
+
+            resourceChangedTexts[(int)resourcePair.Key].text = resourceValue.ToString();
         }
     }
 
@@ -244,17 +365,52 @@ public class GameController : MonoBehaviour
             resourceText.text = 0.ToString();
         }
 
-        foreach (MapRegions region in regions)
-        {
-            foreach (KeyValuePair<EResources, int> resourcePair in region.Resources)
-            {
-                if (resourcePair.Key == EResources.UncountedPopulation)
-                    continue;
 
-                int resourceValue = int.Parse(resourceTexts[(int)resourcePair.Key].text);
-                resourceValue += resourcePair.Value;
-                resourceTexts[(int)resourcePair.Key].text = resourceValue.ToString();
+        foreach (KeyValuePair<EResources, int> resourcePair in previousResources)
+        {
+            if (resourcePair.Key == EResources.UncountedPopulation)
+                continue;
+
+            int resourceValue = 0;
+
+            foreach (MapRegions region in regions)
+            {
+                resourceValue += region.Resources[resourcePair.Key];
             }
+
+            resourceTexts[(int)resourcePair.Key].text = resourceValue.ToString();
+        }
+    }
+
+    private void TotalPreviousResourceTexts()
+    {
+        foreach (Text resourceText in resourceChangedTexts)
+        {
+            resourceText.text = 0.ToString();
+        }
+
+        foreach (KeyValuePair<EResources, int> resourcePair in previousResources)
+        {
+            if (resourcePair.Key == EResources.UncountedPopulation)
+                continue;
+
+            int resourceValue = 0; 
+
+            foreach (MapRegions region in regions)
+            {
+                resourceValue += region.Resources[resourcePair.Key];
+            }
+
+            resourceValue = int.Parse(resourceTexts[(int)resourcePair.Key].text) - resourcePair.Value;
+
+            if (resourceValue < 0)
+                resourceChangedTexts[(int)resourcePair.Key].color = Color.red;
+            else if (resourceValue > 0)
+                resourceChangedTexts[(int)resourcePair.Key].color = Color.green;
+            else
+                resourceChangedTexts[(int)resourcePair.Key].color = resourceTexts[(int)resourcePair.Key].color;
+
+            resourceChangedTexts[(int)resourcePair.Key].text = resourceValue.ToString();
         }
     }
 
@@ -268,15 +424,34 @@ public class GameController : MonoBehaviour
 
     private int CheckForRegionProsperity(MapRegions region)
     {
-        if (region.Resources[EResources.Population] < 200)
+        if (region.Resources[EResources.Population] < populationLimit)
             return 0;
 
         foreach (KeyValuePair<EResources, int> resource in region.Resources)
         {
-            if (region.PreviousResources[resource.Key] > resource.Value)
+            int resourceValue = resource.Value;
+
+            if (region.TradeRoutes[resource.Key].Count != 0)
+            {
+                foreach (MapRegions otherRegion in region.TradeRoutes[resource.Key])
+                {
+                    resourceValue += otherRegion.Resources[resource.Key];
+                }
+            }
+
+            if (region.PreviousResources[resource.Key] > resourceValue)
                 return 0;
         }
 
         return 1;
+    }
+
+    public IEnumerator FlashNotEnoughText(string resource)
+    {
+        NotEnoughText.text = notEnoughText.text.Substring(0, 11) + resource;
+
+        notEnoughText.transform.parent.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        notEnoughText.transform.parent.gameObject.SetActive(false);
     }
 }

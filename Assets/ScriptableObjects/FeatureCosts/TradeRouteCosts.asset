@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b22d7fe3a30e0b48aed0cb3fc660fbf, type: 3}
-  m_Name: MineCosts
+  m_Name: TradeRouteCosts
   m_EditorClassIdentifier: 
-  stone: 0
-  wood: 3
+  stone: 1
+  wood: 0
   iron: 0
-  gold: 4
+  gold: 1
   grain: 0
   meat: 0
   water: 0
-  population: 2
+  population: 0

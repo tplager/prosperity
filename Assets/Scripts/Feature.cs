@@ -90,6 +90,8 @@ public class Feature : MonoBehaviour
         get { return homeRegion; }
     }
 
+    public GameController Controller { get { return controller; } set { controller = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,7 +133,7 @@ public class Feature : MonoBehaviour
             homeRegion.ModifyResources(EResources.Population, 13);
         }
 
-        homeRegion.FeatureCosts[featureType.ToString()].BuildFeature(homeRegion.Resources);
+        homeRegion.FeatureCosts[featureType.ToString()].BuildFeature(homeRegion);
     }
 
     public void OnMouseEnter()
@@ -161,40 +163,64 @@ public class Feature : MonoBehaviour
                 Camera.main.GetComponent<Zoom>().targetOrtho = 1;
                 StartCoroutine(Camera.main.GetComponent<Zoom>().MoveCameraToPoint(transform.position));
 
-                Debug.Log("Double Click");
+                //Debug.Log("Double Click");
             }
             else// if ((clicks == 2 || clicks == 0) && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
             {
                 clicks = 1;
 
-                Debug.Log("Single Click");
+                //Debug.Log("Single Click");
 
                 if (controller.CurrentFeature == EFeatureType.Aqueduct || controller.CurrentFeature == EFeatureType.TradeRoute)
                 {
                     if (!controller.BuildingRoad)
                     {
-                        controller.BuildingRoad = true;
-                        if ((featureType == EFeatureType.Port || featureType == EFeatureType.Well) && controller.CurrentFeature == EFeatureType.Aqueduct)
+                        if (controller.CurrentFeature == EFeatureType.Aqueduct)
                         {
-                            // Instantiate a new aqueduct prefab and give control of it to the game controller
-                            // Game controller needs to update it each frame so it's at the same position as the mouse
-                            // Until either a different feature is clicked that can accept the aqueduct or until it is 
-                            // cancelled by clicking somewhere else or hitting enter or backspace or something
+                            if (featureType == EFeatureType.Port || featureType == EFeatureType.Well)
+                            {
+                                // Instantiate a new aqueduct prefab and give control of it to the game controller
+                                // Game controller needs to update it each frame so it's at the same position as the mouse
+                                // Until either a different feature is clicked that can accept the aqueduct or until it is 
+                                // cancelled by clicking somewhere else or hitting enter or backspace or something
+                                GameObject aqueduct = Instantiate(aqueductPrefab);
+                                aqueduct.GetComponent<TradeRoute>().StartRoad(this);
+                            }
+                            else
+                            {
+                                StartCoroutine(controller.FlashCursor());
+                            }
                         }
                         else if (controller.CurrentFeature == EFeatureType.TradeRoute)
                         {
-                            // Same thing as above, but substitute aqueduct with trade route
+                            if (featureType == EFeatureType.Port || featureType == EFeatureType.Well)
+                            {
+                                StartCoroutine(controller.FlashCursor());
+                            }
+                            else
+                            {
+                                GameObject tradeRoute = Instantiate(tradeRoutePrefab);
+                                tradeRoute.GetComponent<TradeRoute>().StartRoad(this);
+                            }
                         }
                     }
                     else
                     {
                         if (featureType == EFeatureType.Port || featureType == EFeatureType.Village || featureType == EFeatureType.Town || featureType == EFeatureType.City)
                         {
-                            // Finish the Trade Route or Aqueduct and connect it to both features
-                        }
-                        else
-                        {
-                            // Drop the road into the abyss
+                            GameObject tradeRoute = controller.CurrentRoad;
+                            tradeRoute.GetComponent<TradeRoute>().ConnectedFeatures[1] = this;
+
+                            if ((controller.CurrentFeature == EFeatureType.Aqueduct && controller.FeatureCosts["Aqueduct"].VerifyRoadCosts(tradeRoute.GetComponent<TradeRoute>())) ||
+                                controller.CurrentFeature == EFeatureType.TradeRoute && controller.FeatureCosts["TradeRoute"].VerifyRoadCosts(tradeRoute.GetComponent<TradeRoute>()))
+                            {
+                                // Finish the Trade Route or Aqueduct and connect it to both features
+                                tradeRoute.GetComponent<TradeRoute>().EndRoad(this);
+                            }
+                            else
+                            {
+                                StartCoroutine(controller.FlashCursor());
+                            }
                         }
                     }
                 }
@@ -232,16 +258,19 @@ public class Feature : MonoBehaviour
                 break;
             case EFeatureType.Village:
                 homeRegion.ModifyResources(EResources.Gold, 2);
+                homeRegion.ModifyResources(EResources.Grain, -2);
                 homeRegion.ModifyResources(EResources.Meat, -2);
                 homeRegion.ModifyResources(EResources.Water, -2);
                 break;
             case EFeatureType.Town:
                 homeRegion.ModifyResources(EResources.Gold, 5);
+                homeRegion.ModifyResources(EResources.Grain, -5);
                 homeRegion.ModifyResources(EResources.Meat, -5);
                 homeRegion.ModifyResources(EResources.Water, -5);
                 break;
             case EFeatureType.City:
                 homeRegion.ModifyResources(EResources.Gold, 12);
+                homeRegion.ModifyResources(EResources.Grain, -12);
                 homeRegion.ModifyResources(EResources.Meat, -12);
                 homeRegion.ModifyResources(EResources.Water, -12);
                 break;
@@ -266,8 +295,11 @@ public class Feature : MonoBehaviour
         {
             FeatureCosts selectedFeatureCost = homeRegion.FeatureCosts[upgradedFeature.ToString()];
 
-            if (selectedFeatureCost.VerifyCosts(homeRegion.Resources))
+            if (selectedFeatureCost.VerifyCosts(homeRegion))
+            {
                 FeatureType = upgradedFeature;
+                BuildFeature();
+            }
             else
                 StartCoroutine(controller.FlashCursor());
         }

@@ -17,14 +17,16 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Dictionary<EResources, int> resources = new Dictionary<EResources, int>();
     private Dictionary<EResources, int> previousResources = new Dictionary<EResources, int>();
 
-    [SerializeField] private List<string> featureCostPairNames;
-    [SerializeField] private List<FeatureCosts> featureCostsPairCosts;
     private Dictionary<string, FeatureCosts> featureCosts = new Dictionary<string, FeatureCosts>();
+
+    private Dictionary<EResources, List<MapRegions>> tradeRoutes = new Dictionary<EResources, List<MapRegions>>();
 
     #region Properties
     public Dictionary<EResources, int> Resources { get { return resources; } }
     public Dictionary<EResources, int> PreviousResources { get { return previousResources; } set { previousResources = value; } }
     public Dictionary<string, FeatureCosts> FeatureCosts { get { return featureCosts; } }
+    public Dictionary<EResources, List<MapRegions>> TradeRoutes { get { return tradeRoutes; } set { tradeRoutes = value; } }
+    public GameController Controller { get { return controller; } }
     #endregion
 
     // Start is called before the first frame update
@@ -47,10 +49,13 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         resources.Add(EResources.Population, 0);
         resources.Add(EResources.UncountedPopulation, 0);
 
-        for (int i = 0; i < featureCostPairNames.Count; i++)
+        foreach (KeyValuePair<EResources, int> resource in resources)
         {
-            featureCosts.Add(featureCostPairNames[i], featureCostsPairCosts[i]); 
+            tradeRoutes.Add(resource.Key, new List<MapRegions>());
+            previousResources.Add(resource.Key, 0);
         }
+
+        featureCosts = controller.FeatureCosts;
     }
 
     // Update is called once per frame
@@ -72,7 +77,7 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("Clicked: " + gameObject.name);
+            //Debug.Log("Clicked: " + gameObject.name);
 
             if (controller.CurrentFeature == EFeatureType.TradeRoute || controller.CurrentFeature == EFeatureType.Aqueduct)
             {
@@ -87,7 +92,7 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 RaycastHit hit;
                 Physics.Raycast(clickWorldPosition, new Vector3(0, 0, 1), out hit, 1);
 
-                if (selectedFeatureCost.VerifyCosts(Resources))
+                if (selectedFeatureCost.VerifyCosts(this))
                 { 
                     if (controller.CurrentFeature != EFeatureType.Village && !hit.collider.name.Contains(controller.CurrentFeature.ToString()))
                     {
@@ -114,21 +119,23 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter: " + gameObject.name);
+        //Debug.Log("Pointer Enter: " + gameObject.name);
 
         meshRend.enabled = true;
         meshRend.material.color = new Color(0, 0, 1, 0.25f);
 
-        controller.SpecifyResourceTexts(this); 
+        controller.SpecifyResourceTexts(this);
+        controller.SpecifyPreviousResourceText(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit: " + gameObject.name);
+        //Debug.Log("Pointer Exit: " + gameObject.name);
 
         meshRend.enabled = false;
 
         controller.SpecifyResourceTexts(null);
+        controller.SpecifyPreviousResourceText(null);
     }
 
     public void ModifyResources(EResources resource, int amountToModify)
@@ -139,5 +146,8 @@ public class MapRegions : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             resources[EResources.UncountedPopulation] += amountToModify; 
         }
+
+        controller.SpecifyResourceTexts(this);
+        controller.SpecifyPreviousResourceText(this);
     }
 }
