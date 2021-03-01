@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class Feature : MonoBehaviour
 {
     private EFeatureType featureType;
     private MapIconContainer iconContainer;
@@ -66,6 +66,16 @@ public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                         new Rect(0, 0, iconContainer.PortIcon.width, iconContainer.PortIcon.height),
                         new Vector2(0.5f, 0.5f));
                     break;
+                case EFeatureType.Town:
+                    sRenderer.sprite = Sprite.Create(iconContainer.TownIcon,
+                        new Rect(0, 0, iconContainer.VillageIcon.width, iconContainer.VillageIcon.height),
+                        new Vector2(0.5f, 0.5f));
+                    break;
+                case EFeatureType.City:
+                    sRenderer.sprite = Sprite.Create(iconContainer.CityIcon,
+                        new Rect(0, 0, iconContainer.VillageIcon.width, iconContainer.VillageIcon.height),
+                        new Vector2(0.5f, 0.5f));
+                    break;
             }
         }
     }
@@ -100,26 +110,27 @@ public class Feature : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         FeatureType = type;
         this.controller = controller; 
     }
-    public void OnPointerEnter(PointerEventData eventData)
+
+    public void OnMouseEnter()
     {
         backgroundSRenderer.enabled = true;
 
-        if (Camera.main.GetComponent<Zoom>().targetOrtho == 1)
+        if (Camera.main.orthographicSize == 1)
         {
             controller.ShowUpgradeButton(this);
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnMouseExit()
     {
         backgroundSRenderer.enabled = false;
 
         controller.HideUpgradeButton();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnMouseDown()
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (Input.GetMouseButtonDown(0))
         {
             if (clicks == 1 && timeSinceLastClick < 0.5f && Camera.main.GetComponent<Zoom>().targetOrtho != 1)
             {

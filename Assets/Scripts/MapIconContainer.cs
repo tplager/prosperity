@@ -15,6 +15,8 @@ public class MapIconContainer : ScriptableObject
     [SerializeField] private Texture2D portIcon;
     [SerializeField] private Texture2D roadIcon;
     [SerializeField] private Texture2D aqeductIcon;
+    [SerializeField] private Texture2D townIcon;
+    [SerializeField] private Texture2D cityIcon;
 
     public Texture2D QuarryIcon { get => quarryIcon; set => quarryIcon = value; }
     public Texture2D LumberMillIcon { get => lumberMillIcon; set => lumberMillIcon = value; }
@@ -26,4 +28,6 @@ public class MapIconContainer : ScriptableObject
     public Texture2D PortIcon { get => portIcon; set => portIcon = value; }
     public Texture2D RoadIcon { get => roadIcon; set => roadIcon = value; }
     public Texture2D AqeductIcon { get => aqeductIcon; set => aqeductIcon = value; }
+    public Texture2D TownIcon { get => townIcon; set => townIcon = value; }
+    public Texture2D CityIcon { get => cityIcon; set => cityIcon = value; }
 }
