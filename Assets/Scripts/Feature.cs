@@ -304,9 +304,4 @@ public class Feature : MonoBehaviour
                 StartCoroutine(controller.FlashCursor());
         }
     }
-
-    private void UpdateFeatureType(EFeatureType featureType)
-    {
-
-    }
 }

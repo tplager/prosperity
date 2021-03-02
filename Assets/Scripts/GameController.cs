@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private MapIconContainer iconContainer;
+    [SerializeField] private MapIconContainer cursorContainer;
 
     [SerializeField] private Texture2D hazardCursorTexture; 
     private Texture2D currentCursorTexture;
@@ -84,6 +85,7 @@ public class GameController : MonoBehaviour
         previousResources.Add(EResources.UncountedPopulation, 0);
 
         TotalResourceTexts();
+        TotalPreviousResourceTexts();
     }
 
     // Update is called once per frame
@@ -126,12 +128,12 @@ public class GameController : MonoBehaviour
             }
             else if (currentIndex == 9)
             {
-                currentCursorTexture = iconContainer.TradeRouteIcon;
+                currentCursorTexture = cursorContainer.TradeRouteIcon;
                 currentFeatureSelection = EFeatureType.TradeRoute;
             }
             else if (currentIndex == 10)
             {
-                currentCursorTexture = iconContainer.AqeductIcon;
+                currentCursorTexture = cursorContainer.AqeductIcon;
                 currentFeatureSelection = EFeatureType.Aqueduct;
             }
         }
@@ -144,54 +146,54 @@ public class GameController : MonoBehaviour
             
             if (currentIndex == 1)
             {
-                currentCursorTexture = iconContainer.QuarryIcon;
+                currentCursorTexture = cursorContainer.QuarryIcon;
                 currentFeatureSelection = EFeatureType.Quarry;
                 resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 2)
             {
-                currentCursorTexture = iconContainer.LumberMillIcon;
+                currentCursorTexture = cursorContainer.LumberMillIcon;
                 currentFeatureSelection = EFeatureType.LumberMill;
                 resourceRegions["LumberMill"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["LumberMill"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 3)
             {
-                currentCursorTexture = iconContainer.MineIcon;
+                currentCursorTexture = cursorContainer.MineIcon;
                 currentFeatureSelection = EFeatureType.Mine;
                 resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["MineAndQuarry"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 4)
             {
-                currentCursorTexture = iconContainer.FieldIcon;
+                currentCursorTexture = cursorContainer.FieldIcon;
                 currentFeatureSelection = EFeatureType.Field;
                 resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 5)
             {
-                currentCursorTexture = iconContainer.LivestockFarmIcon;
+                currentCursorTexture = cursorContainer.LivestockFarmIcon;
                 currentFeatureSelection = EFeatureType.LivestockFarm;
                 resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["LivestockFarmAndField"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 6)
             {
-                currentCursorTexture = iconContainer.WellIcon;
+                currentCursorTexture = cursorContainer.WellIcon;
                 currentFeatureSelection = EFeatureType.Well;
                 resourceRegions["Well"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["Well"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);
             }
             else if (currentIndex == 7)
             {
-                currentCursorTexture = iconContainer.VillageIcon;
+                currentCursorTexture = cursorContainer.VillageIcon;
                 currentFeatureSelection = EFeatureType.Village;
             }
             else if (currentIndex == 8)
             {
-                currentCursorTexture = iconContainer.PortIcon;
+                currentCursorTexture = cursorContainer.PortIcon;
                 currentFeatureSelection = EFeatureType.Port;
                 resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().enabled = true;
                 resourceRegions["Port"].gameObject.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0, 0.25f);

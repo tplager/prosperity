@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331d5554d3383a14e8a766a38a5b9d28, type: 3}
+  m_Name: MapCursorData
+  m_EditorClassIdentifier: 
+  quarryIcon: {fileID: 2800000, guid: 2e14b6a6b42da9d4a8407835574cc6c4, type: 3}
+  lumberMillIcon: {fileID: 2800000, guid: 10357d39a7311d947aaf86ed6686a8ca, type: 3}
+  mineIcon: {fileID: 2800000, guid: 816910fb419c8bf4bb157e8075194c28, type: 3}
+  fieldIcon: {fileID: 2800000, guid: 00b19ab18de4df9479ceaaa06ea4c115, type: 3}
+  livestockFarmIcon: {fileID: 2800000, guid: 1a442c3da1848d84aa6b3cc143028f9a, type: 3}
+  wellIcon: {fileID: 2800000, guid: f1a1a61d774c87f4d9b76fcd664b8d10, type: 3}
+  villageIcon: {fileID: 2800000, guid: 6847aa8a97b38ca42a0d40fa9d5d58e5, type: 3}
+  portIcon: {fileID: 2800000, guid: aa3453bf171be7848818d5c781c73fcd, type: 3}
+  tradeRouteIcon: {fileID: 2800000, guid: 9d31b34897b29c04e8debe85109ac04f, type: 3}
+  aqeductIcon: {fileID: 2800000, guid: 1937e7130b4afaf49a8de7c7aaefaef0, type: 3}
+  townIcon: {fileID: 0}
+  cityIcon: {fileID: 0}

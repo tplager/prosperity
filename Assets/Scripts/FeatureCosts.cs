@@ -123,6 +123,9 @@ public class FeatureCosts : ScriptableObject
             {
                 updatedRegion.Key.Resources[updatedResource.Key] = updatedResource.Value;
             }
+
+            updatedRegion.Key.Controller.SpecifyResourceTexts(updatedRegion.Key);
+            updatedRegion.Key.Controller.SpecifyPreviousResourceText(updatedRegion.Key);
         }
     }
 
@@ -159,6 +162,9 @@ public class FeatureCosts : ScriptableObject
             resources1[updatedResource.Key] = updatedResources1[updatedResource.Key];
             resources2[updatedResource.Key] = updatedResources2[updatedResource.Key];
         }
+
+        road.ConnectedFeatures[1].HomeRegion.Controller.SpecifyResourceTexts(road.ConnectedFeatures[0].HomeRegion);
+        road.ConnectedFeatures[1].HomeRegion.Controller.SpecifyPreviousResourceText(road.ConnectedFeatures[0].HomeRegion);
     }
 
     private int SetResourceCostHelper(EResources resource)
